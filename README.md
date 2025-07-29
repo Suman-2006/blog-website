@@ -35,7 +35,7 @@ blog-website/
 
 1. **Clone or Download** this repository:
    ```bash
-   git clone https://github.com/your-username/blog-website.git
+   git clone [https://github.com/your-username/blog-website.git](https://github.com/Suman-2006/blog-website)
 2. Open index.html in your browser.
 3.Interact with the blog: read posts, leave comments, like/unlike, upload a post, and more!.
 
