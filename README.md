@@ -23,6 +23,7 @@ features like likes, comments, uploads, and more.
 ## 📂 Project Structure
 
 blog-website/
+
 ├── index.html # Main HTML page
 
 ├── styles.css # Styling and responsive layout
