@@ -47,9 +47,13 @@ blog-website/
 ---
 
 🧪 Tested On
+
 ✔️ Google Chrome
+
 ✔️ Firefox
+
 ✔️ Edge
+
 ✔️ Mobile and Tablet devices (responsive layout)
 
 ---
