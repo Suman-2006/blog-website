@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Blog Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>My Blog</h1>
+    <nav>
+      <ul>
+        <li><a href="#post1">Post 1</a></li>
+        <li><a href="#post2">Post 2</a></li>
+        <li><a href="#post3">Post 3</a></li>
+      </ul>
+    </nav>
+
+      <div id="searchContainer">
+      <input type="text" id="searchInput" placeholder="Search blog posts..." />
+    </div>
+
+    <div id="uploadBtnContainer">
+      <button id="showUploadBtn">➕ Upload Blog</button>
+    </div>
+  </header>
+
+  <section id="uploadSection">
+    <h2>📝 Upload a New Blog Post</h2>
+    <form id="uploadForm">
+      <input type="text" id="newTitle" placeholder="Blog Title" required />
+      <label for="newImage">Blog Image:</label>
+      <input type="file" id="newImage" accept="image/*" required />
+      <textarea id="newDescription" placeholder="Description" required></textarea>
+      <input type="text" id="newTags" placeholder="Tags (comma-separated)" required />
+      <button type="submit">Upload Blog</button>
+    </form>
+    <hr />
+  </section>
+<div id="postsContainer"></div>
+  <!-- Blog Post 1 -->
+  <section id="post1" class="post">
+    <h2>🌐 The Future of Web Development</h2>
+    <p class="date">Published on: July 25, 2025</p>
+    <img src="assets/web.jpg" alt="Web development" />
+    <p>Web development is evolving rapidly with new frameworks, tools, and technologies.</p>
+    <p class="tags">Tags: <span>#WebDev</span> <span>#Frontend</span></p>
+
+    <div class="share-wrapper">
+      <button class="share-toggle" onclick="toggleShare(1)">🔗 Share</button>
+      <div class="share-options" id="shareOptions1">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com/post1" target="_blank" rel="noopener">📘 Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=Check%20this%20post!&url=https://example.com/post1" target="_blank" rel="noopener">🐦 Twitter</a>
+        <a href="https://api.whatsapp.com/send?text=Check%20this%20post!%20https://example.com/post1" target="_blank" rel="noopener">📲 WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="post-likes">
+      <button id="postLikeBtn1" class="post-like-btn" onclick="toggleLike(1)">👍 Like</button>
+      <span id="likeCount1" class="like-count">0 Likes</span>
+    </div>
+
+    <div class="comments">
+      <h3>Leave a Comment:</h3>
+      <input type="text" placeholder="Your Name" id="name1" />
+      <textarea placeholder="Your Comment" id="comment1"></textarea>
+      <button onclick="submitComment('1')">Submit</button>
+      <p id="commentCount1">Comments: 0</p>
+      <div id="commentDisplay1"></div>
+    </div>
+  </section>
+
+  <!-- Blog Post 2 -->
+  <section id="post2" class="post">
+    <h2>📱 Mobile First Design: Why It Matters</h2>
+    <p class="date">Published on: July 27, 2025</p>
+    <img src="assets/mobile.jpg" alt="Mobile First Design" />
+    <p>Mobile-first design ensures better usability for users on smartphones.</p>
+    <p class="tags">Tags: <span>#MobileFirst</span> <span>#UX</span></p>
+
+    <div class="share-wrapper">
+      <button class="share-toggle" onclick="toggleShare(2)">🔗 Share</button>
+      <div class="share-options" id="shareOptions2">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com/post2" target="_blank" rel="noopener">📘 Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=Check%20this%20post!&url=https://example.com/post2" target="_blank" rel="noopener">🐦 Twitter</a>
+        <a href="https://api.whatsapp.com/send?text=Check%20this%20post!%20https://example.com/post2" target="_blank" rel="noopener">📲 WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="post-likes">
+      <button id="postLikeBtn2" class="post-like-btn" onclick="toggleLike(2)">👍 Like</button>
+      <span id="likeCount2" class="like-count">0 Likes</span>
+    </div>
+
+    <div class="comments">
+      <h3>Leave a Comment:</h3>
+      <input type="text" placeholder="Your Name" id="name2" />
+      <textarea placeholder="Your Comment" id="comment2"></textarea>
+      <button onclick="submitComment('2')">Submit</button>
+      <p id="commentCount2">Comments: 0</p>
+      <div id="commentDisplay2"></div>
+    </div>
+  </section>
+
+  <!-- Blog Post 3 -->
+  <section id="post3" class="post">
+    <h2>💡 JavaScript Tips for Beginners</h2>
+    <p class="date">Published on: July 29, 2025</p>
+    <img src="assets/javascript.jpg" alt="JavaScript Tips" />
+    <p>JavaScript is the backbone of modern web apps. Learn core concepts first.</p>
+    <p class="tags">Tags: <span>#JavaScript</span> <span>#Tips</span></p>
+
+    <div class="share-wrapper">
+      <button class="share-toggle" onclick="toggleShare(3)">🔗 Share</button>
+      <div class="share-options" id="shareOptions3">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com/post3" target="_blank" rel="noopener">📘 Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=Check%20this%20post!&url=https://example.com/post3" target="_blank" rel="noopener">🐦 Twitter</a>
+        <a href="https://api.whatsapp.com/send?text=Check%20this%20post!%20https://example.com/post3" target="_blank" rel="noopener">📲 WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="post-likes">
+      <button id="postLikeBtn3" class="post-like-btn" onclick="toggleLike(3)">👍 Like</button>
+      <span id="likeCount3" class="like-count">0 Likes</span>
+    </div>
+
+    <div class="comments">
+      <h3>Leave a Comment:</h3>
+      <input type="text" placeholder="Your Name" id="name3" />
+      <textarea placeholder="Your Comment" id="comment3"></textarea>
+      <button onclick="submitComment('3')">Submit</button>
+      <p id="commentCount3">Comments: 0</p>
+      <div id="commentDisplay3"></div>
+    </div>
+  </section>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
