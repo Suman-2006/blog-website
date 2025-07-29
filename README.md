@@ -24,9 +24,13 @@ features like likes, comments, uploads, and more.
 
 blog-website/
 ├── index.html # Main HTML page
+
 ├── styles.css # Styling and responsive layout
+
 ├── script.js # JavaScript for all interactivity
+
 ├── assets/ # Folder for images
+
 └── README.md # This file
 
 ---
