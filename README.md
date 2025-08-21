@@ -14,7 +14,7 @@ features like likes, comments, uploads, and more.
 - 💬 **Comment Section** with live count and deletion
 - 👍 **Like/Unlike** Functionality (saved via cookies)
 - 🔍 **Search Filter** for blog posts
-- 🔗 **Social Media Sharing Options**
+- 🔗 **Social Media Sharing Options such as whatsapp,twitter,ect..**
 - 🗑️ **Delete Uploaded Post**
 - 📱 **Responsive Design** for mobile and desktop
 
