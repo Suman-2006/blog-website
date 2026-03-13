@@ -1,0 +1,28 @@
+Since you didn't provide the original source code, I have generated a patch based on a standard Python web controller (like Flask or Django) where the logic needs to validate that both the username/email and password are provided before attempting authentication.
+
+### Patch Description
+This patch adds a validation check to the `login` function. If either the `username` or `password` fields are missing, empty, or contain only whitespace, it returns a `400 Bad Request` error with a message prompting the user to fill in all fields.
+
+```diff
+--- a/login_controller.py
++++ b/login_controller.py
+@@ -12,6 +12,12 @@
+     username = request.form.get('username')
+     password = request.form.get('password')
+ 
++    # Validation: Ensure all fields are entered
++    if not username or not password or not username.strip() or not password.strip():
++        return {
++            "status": "error",
++            "message": "Please fill all the fields"
++        }, 400
++
+     # Proceed with authentication logic
+     user = auth_service.authenticate(username, password)
+     if user:
+```
+
+### Key Changes:
+1.  **Null/Empty Check**: Checks if the variables are `None` or empty strings.
+2.  **Whitespace Check**: Uses `.strip()` to ensure the user hasn't just entered spaces.
+3.  **Early Return**: Stops execution before hitting the database or authentication service, saving resources and preventing potential downstream errors.
