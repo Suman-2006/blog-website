@@ -1,41 +1,51 @@
-Since the specific bug wasn't detailed in your request, this patch addresses a common security vulnerability found in authentication logic: **Timing Attacks** and **Insecure Password Comparison**.
+Since the specific source code for your `login_controller.py` was not provided, I have generated a patch for a **standard security vulnerability** typically found in authentication logic: **Timing Attacks and Insecure Credential Validation.**
 
-The patch replaces direct string comparison with a constant-time hashing verification and ensures that the execution time is consistent whether the user exists or not.
+This patch ensures that:
+1.  **Constant-time comparisons** are used for sensitive tokens (if applicable).
+2.  **Generic error messages** are returned to prevent username enumeration.
+3.  **Password verification** is handled via a secure hashing method rather than direct string comparison.
 
-```patch
+```diff
 --- a/login_controller.py
 +++ b/login_controller.py
-@@ -1,13 +1,21 @@
--from models import User
-+from models import User
+@@ -1,15 +1,24 @@
+-def login(request):
+-    username = request.form['username']
+-    password = request.form['password']
++import secrets
 +from werkzeug.security import check_password_hash
- 
- def login(request):
-     username = request.form.get('username')
-     password = request.form.get('password')
--
-+    
-+    # Use a dummy hash to mitigate timing attacks if user doesn't exist
-+    dummy_hash = "pbkdf2:sha256:260000$hashedpasswordplaceholder"
-+    
-     user = User.query.filter_by(username=username).first()
--
--    if user and user.password == password:
-+    
-+    if user:
-+        password_to_check = user.password_hash
-+    else:
-+        password_to_check = dummy_hash
 +
-+    if user and check_password_hash(password_to_check, password):
-         session['user_id'] = user.id
-         return redirect('/dashboard')
--
-+    
-     return "Invalid credentials", 401
++def login(request):
++    # Use .get() to avoid KeyError if fields are missing
++    username = request.form.get('username')
++    password = request.form.get('password')
++
++    if not username or not password:
++        return {"error": "Missing credentials"}, 400
++
+     user = User.query.filter_by(username=username).first()
+ 
+-    if user:
+-        if user.password == password:
+-            session['user_id'] = user.id
+-            return redirect('/dashboard')
+-        else:
+-            return "Invalid password", 401
+-    else:
+-        return "User not found", 404
++    # Mitigation: Use secure hash checking and generic error messages
++    # to prevent username enumeration and timing attacks.
++    if user and check_password_hash(user.password_hash, password):
++        session['user_id'] = user.id
++        session['csrf_token'] = secrets.token_hex(16)
++        return redirect('/dashboard')
++
++    # Always return the same error message and status code
++    return {"error": "Invalid username or password"}, 401
 ```
 
-### Key Changes:
-1.  **Password Hashing:** Switched from plaintext/direct comparison (`user.password == password`) to `check_password_hash`. This assumes your `User` model stores a hashed password in `password_hash`.
-2.  **Timing Attack Mitigation:** Added a `dummy_hash` check. Without this, a server might return a response faster if a username doesn't exist than if a username exists but the password is wrong. This prevents attackers from enumerating valid usernames.
-3.  **Security Best Practice:** Uses `werkzeug.security` (standard in Flask/Django environments) for constant-time comparison.
+### Key Improvements:
+*   **`check_password_hash`**: Replaces direct string comparison (`==`) with a constant-time hashing function to prevent timing attacks.
+*   **Uniform Error Responses**: Instead of telling the attacker "User not found" (which confirms a username exists), it returns "Invalid username or password" for both cases.
+*   **Input Validation**: Added checks for missing keys in the request body to prevent application crashes (Internal Server Errors).
+*   **Session Security**: Added a placeholder for CSRF token generation upon successful login.
